@@ -1,0 +1,277 @@
+USE training;
+CREATE table tbl_employee(
+	eid INT,
+    ename VARCHAR(50),
+    esalary INT,
+    dno INT
+);
+
+DESC tbl_employee;
+
+insert into tbl_employee values
+(101,'Reshma',10000,10),
+(102,'Srima',20000,20),
+(103,'Keerthi',30000,10),
+(104,'Abhi',30000,20);
+
+truncate table tbl_employee;
+SELECT * 
+FROM tbl_employee;
+
+-- number of employees in each dept using GROUP BY.
+SELECT dno,count(*)
+FROM tbl_employee
+group by dno;
+
+-- using alias(AS) to rename 
+SELECT dno,count(*) as "total number of employees"
+FROM tbl_employee
+group by dno;
+
+-- USING AGGREGATION FUNCTIONS (group functions)
+SELECT dno,SUM(esalary),AVG(esalary),MIN(esalary),MAX(esalary)
+FROM tbl_employee
+group by dno;
+
+-- using HAVING(it is used to apply conditions in case of GROUPBY)
+SELECT dno,SUM(esalary),AVG(esalary),MIN(esalary),MAX(esalary)
+FROM tbl_employee
+group by dno
+having min(esalary)>10000;
+
+-- order by is a class which is used to sort values in ascending or descending order ,by default it is ascending order.
+SELECT dno,SUM(esalary),AVG(esalary),MIN(esalary),MAX(esalary)
+FROM tbl_employee
+group by dno
+order by dno Asc;
+-- IN SQL,ORDER BY QUERY MUST BE THE LAST QUERY IN SELECT STATEMENT,ELSE YOU WILL GET SYNTAX ERROR.
+
+-- ORDER BY is a common keyword THAT CAN BE USED IN NORMAL select queries also,it's not mandatory that IT SHOULD BE ALONG WITH GROUP BY.
+SELECT *
+FROM tbl_employee
+ORDER BY eid DESC;
+
+--  SUBQUERY
+
+CREATE TABLE tbl_department(
+	dno INT,
+    dname VARCHAR(50)
+);
+
+INSERT INTO tbl_department VALUES
+(10,'Development'),
+(20,'Testing');    
+
+SELECT * from tbl_department;
+
+-- SUBQUERY is a query inside another query.
+-- printing dname which is linked to eid=101.
+SELECT dname from tbl_department
+where dno=(SELECT dno from tbl_employee where eid=101);
+
+-- displaying values where dname is testing.
+select * from tbl_employee
+where dno=(SELECT dno from tbl_department where dname='Testing');
+
+-- displaying dname of specified employee
+select dname  from tbl_department
+where dno=(SELECT dno from tbl_employee where ename='Srima');
+
+-- IF THE  INNER QUERY IS RETURNING ONLY ONE VALUE THEN IT IS CALLED AS "SINGLE ROW SUB QUERY(SRSQ)".
+-- IF THE INNER QUERY IS RETURNING MULTIPLE VALUES THEN IT IS CALLED AS "MULTI-ROW SUB QUERY".
+-- you should use IN OR NOT IN for multi row sub query unlike = in Single row sub query (in first select statement after where common key " ")
+
+SELECT dname from tbl_department where dno IN
+(SELECT dno from tbl_employee where eid= 101 or eid=102);
+
+drop table tbl_employee;
+
+-- CONSTRAINTS = rules applied to table columns to limit the type of data that can be entered.They are PRIMARY KEY,FOREIGN KEY,NOT NULL,UNIQUE,CHECK,DEFAULT.
+
+CREATE TABLE tbl_employee(
+	eid INT PRIMARY KEY,
+    ename VARCHAR(50) NOT NULL,
+    esalary INT CHECK(esalary>0),
+    email VARCHAR (20) UNIQUE,
+    dno INT);
+
+INSERT INTO tbl_employee VALUES
+(101,'Reshma',10000,'abc@gmail.com',10),
+(102,'Abhi',20000,'abhi@gmail.com',20);    
+
+drop table tbl_employee;
+drop table tbl_department;
+
+-- FOREIGN KEY EXAMPLE
+CREATE table tbl_dept(
+	dno INT PRIMARY KEY,
+    dname VARCHAR(20));
+CREATE table tbl_employee(
+	eid INT PRIMARY KEY,
+    ename VARCHAR(50),
+    esalary INT,
+    dno INT, foreign key (dno) references tbl_dept(dno)); -- USE REFERENCES FOR FOREIGN KEY.
+    
+insert into tbl_employee VALUES
+(101,'Reshma',20000,10);
+insert into tbl_dept values(10,'Tech');
+-- THREE WAYS TO SET CONSTRAINTS: COLUMN LEVEL, TABLE LEVEL AND ALTER LEVEL.
+
+-- PLSQL=PROCEDURAL LANGUGAGE STRUCTURED QUERY LANGUAGE.
+/*
+PL+SQL--.EXTENSION OF SQL
+=>COMBINES SQL WITH PROGRAMMING FEATURES(LIKE VARIABLES,LOOPS,FUNCTIONS ETC.,)
+=>PL is not a coding language
+=>Procedure is a reusable block of code that performs a specific task.
+=>A Stored Procedure is a pre-written collection of SQL statements that is saved inside the database and can be executed whenever needed.
+=>for inserting values use  CALL procedure name (values)
+=> "in" is used for PASS DATA INTO THE PROCEDURE from user
+=> " out" means the procedure returns the result
+=>"SELECT .... INTO" means saying save this value in this variable
+=> BEGIN...END HERE we will have the body of the code*/
+
+
+DELIMITER //
+create procedure insertEmployee(in eid int,in ename varchar(20),in esalary int, in dno int)
+begin
+	INSERT INTO  tbl_employee (eid,ename,esalary,dno) 
+    values (eid,ename,esalary,dno);
+end //    
+call insertEmployee(101,'Reshma',20000,10);
+drop procedure insertEmployee;
+select * from tbl_employee;
+
+-- we use delimiter because in sql we end statements with ';' but in procedure we use ; inside statement so for it to understand we give seperate delimiter so that it can understand that it is end of statement.
+-- STORED PROCEDURE WITH OUT code
+DELIMITER //
+CREATE procedure getEmployeeName(in empid integer,out empname varchar(20))
+begin
+	select ename into empname from tbl_employee where eid=empid;
+end //
+
+-- @EMPNAME HERE IS session variable.
+call getEmployeeName (101, @empname);
+select @empname;    
+
+
+-- FUNCTION: 
+
+/* 
+DETERMINISTIC MEANS: For the same input, the function always returns the same output.
+DECLARE=CREATE A LOCAL VARIABLE
+To call a function,unlike procedure we don't use "call" we use "return"
+Function : Must return exactly one value, It Computes and returns a value.
+=> Function Typically uses only input parameters and returns one value */
+
+DELIMITER //
+CREATE FUNCTION getEmpName(empid integer) returns varchar(20) deterministic
+begin 
+	declare empname varchar(20);
+    select ename into empname from tbl_employee where eid=empid;
+    return empname;
+end //    
+SELECT getEmpName(101);
+
+-- JOINS
+drop table agents;
+drop table customers;
+
+CREATE table agents(
+	agent_id VARCHAR(10) PRIMARY KEY,
+    agent_name VARCHAR(50),
+    working_area VARCHAR(50)
+);
+
+CREATE TABLE customers(
+		customer_code varchar(10) PRIMARY KEY,
+        customer_name VARCHAR(50),
+        customer_area VARCHAR(50)
+);
+INSERT INTO agents VALUES
+('A101','agent1','chennai'),
+('A102','agent2','chennai'),
+('A103','agent3','Banglore'),
+('A104','agent4','Banglore');
+
+insert into customers values
+('C101','customer1','chennai'),
+('C102','customer2','chennai'),
+('C103','customer3','Banglore'),
+('C104','customer4','Banglore'),
+('C105','customer5','Banglore');
+
+-- EQUI JOIN
+select a.agent_name,c.customer_name,c.customer_area
+FROM agents a JOIN customers c
+ON a.working_area=c.customer_area;
+-- NON EQUI JOIN
+select a.agent_name,c.customer_name,c.customer_area
+FROM agents a JOIN customers c
+ON a.working_area <> c.customer_area;
+-- INNER JOIN
+select a.agent_name,c.customer_name,c.customer_area
+FROM agents a inner JOIN customers c
+ON a.working_area=c.customer_area;
+
+drop table agents;
+drop table customers;
+
+CREATE table agents(
+	agent_id VARCHAR(10) PRIMARY KEY,
+    agent_name VARCHAR(50),
+    working_area VARCHAR(50)
+);
+
+CREATE TABLE customers(
+		customer_code varchar(10) PRIMARY KEY,
+        customer_name VARCHAR(50),
+        customer_area VARCHAR(50)
+);
+
+INSERT INTO agents VALUES
+('A101','agent1','chennai'),
+('A102','agent2','chennai'),
+('A103','agent3','Banglore'),
+('A104','agent4','Banglore'),
+('A105','agent5','New York');
+
+insert into customers values
+('C101','customer1','chennai'),
+('C102','customer2','chennai'),
+('C103','customer3','Banglore'),
+('C104','customer4','Banglore'),
+('C105','customer5','Banglore')
+('C106','customer6','Delhi');
+-- LEFT OUTER JOIN
+SELECT * from agents 
+LEFT OUTER JOIN customers ON agents.working_area=customers.customer_area;
+-- RIGHT OUTER JOIN
+SELECT * from agents 
+RIGHT OUTER JOIN customers ON agents.working_area=customers.customer_area;
+-- FULL OUTER JOIN
+SELECT * from agents 
+full outer JOIN customers ON agents.working_area=customers.customer_area; 
+
+-- natural join
+select agents.agent_name, customers.customer_name, customers.customer_area  from agents natural join customers; 
+
+-- SELF JOIN
+CREATE TABLE agentss(
+	agents_code varchar(50),
+    agents_name varchar(50));
+INSERT INTO agentss values
+('A102','agent1'),
+('A101','agent1'),
+('A102','agent2'),
+('A101','agent2'),
+('A104','agent3'),
+('A103','agent3'),
+('A104','agent4'),
+('A103','agent4'),
+('A105','agent5');
+select a.agents_code, b.agents_name from agents a, agentss b where a.working_area = b.working_area; 
+
+-- CROSS JOIN
+Select e.ename , d.dname from tbl_employee e cross  join  tbl_dept d;
+
+
