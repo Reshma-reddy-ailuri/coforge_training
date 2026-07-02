@@ -1,0 +1,176 @@
+CREATE DATABASE employeemanagement;
+USE employeemanagement;
+
+-- TABLE 1
+CREATE TABLE Department (
+   DeptID INT PRIMARY KEY,
+   DeptName VARCHAR(50),
+   Location VARCHAR(50)
+);
+
+INSERT INTO Department VALUES
+(101,'HR','Hyderabad'),
+(102,'Finance','Mumbai'),
+(103,'IT','Bangalore'),
+(104,'Sales','Chennai');
+
+-- TABLE 2
+CREATE TABLE Employee (
+   EmpID INT PRIMARY KEY,
+   EmpName VARCHAR(50),
+   Gender VARCHAR(10),
+   Age INT,
+   Salary DECIMAL(10,2),
+   Designation VARCHAR(50),
+   DeptID INT,
+   HireDate DATE,
+   FOREIGN KEY (DeptID) REFERENCES Department(DeptID)
+);
+
+INSERT INTO Employee VALUES
+(1,'Amit','Male',28,45000,'Software Engineer',103,'2022-05-10'),
+(2,'Priya','Female',30,55000,'HR Manager',101,'2021-03-15'),
+(3,'Rahul','Male',27,50000,'Accountant',102,'2023-01-20'),
+(4,'Sneha','Female',25,42000,'Sales Executive',104,'2022-09-12'),
+(5,'Kiran','Male',31,60000,'Team Lead',103,'2020-11-18');
+
+-- TABLE 3
+CREATE TABLE Attendance (
+   AttendanceID INT PRIMARY KEY,
+   EmpID INT,
+   AttendanceDate DATE,
+   Status VARCHAR(10),
+   FOREIGN KEY (EmpID) REFERENCES Employee(EmpID)
+);
+
+INSERT INTO Attendance VALUES
+(1,1,'2026-07-01','Present'),
+(2,2,'2026-07-01','Present'),
+(3,3,'2026-07-01','Absent'),
+(4,4,'2026-07-01','Present'),
+(5,5,'2026-07-01','Present');
+
+SELECT *
+FROM Employee;
+
+select EmpName,Salary
+FROM Employee;    
+
+SELECT * 
+FROM Employee
+WHERE Salary>50000;
+
+SELECT *
+FROM Employee
+WHERE Age>30;
+
+SELECT e.* 
+FROM Employee e
+JOIN Department d
+ON e.DeptID=d.DeptID
+WHERE d.DeptName='IT';
+
+SELECT *
+FROM Employee
+WHERE Gender='Female';
+
+SELECT * 
+FROM Employee
+WHERE HireDate> 2022-01-01;
+
+select *
+FROM Employee
+order by Salary DESC;
+
+SELECT *
+FROM Employee
+ORDER BY EmpName;
+
+SELECT COUNT(*)
+FROM Employee;
+
+SELECT MAX(Salary)
+FROM Employee;
+
+SELECT MIN(Salary)
+FROM Employee;
+
+SELECT AVG(Salary)
+FROM Employee;
+
+SELECT SUM(Salary)
+FROM Employee;
+
+SELECT d.DeptName,COUNT(e.EmpID) AS TotalEmployees
+FROM Department d
+LEFT JOIN Employee e
+on d.DeptID=e.DeptID
+GROUP BY d.DeptName;
+
+SELECT d.DeptName,AVG(e.Salary) AS average_salary
+FROM Department d
+JOIN Employee e
+ON d.DeptID=e.DeptID
+GROUP BY d.DeptName;
+
+SELECT d.DeptName,MAX(e.Salary) AS HighestSalary
+FROM Department d
+JOIN Employee e
+ON d.DeptID = e.DeptID
+GROUP BY d.DeptName;
+
+SELECT e.EmpName,d.DeptName
+FROM Employee e
+JOIN Department d
+ON e.DeptID = d.DeptID;
+
+SELECT e.EmpName,d.DeptName,d.Location
+FROM Employee e
+JOIN Department d
+ON e.DeptID = d.DeptID;
+
+SELECT e.EmpName,a.AttendanceDate,a.Status
+FROM Employee e
+JOIN Attendance a
+ON e.EmpID = a.EmpID;
+
+UPDATE Employee e
+JOIN Department d
+ON e.DeptID = d.DeptID
+SET e.Salary = e.Salary * 1.10
+WHERE d.DeptName = 'IT';
+SELECT EmpName, Salary
+FROM Employee;
+
+UPDATE Employee
+SET Designation = 'Senior Software Engineer'
+WHERE EmpID = 1;
+
+UPDATE Employee
+SET DeptID = 103
+WHERE EmpID = 3;
+SELECT *
+FROM Employee;
+
+DELETE FROM Employee
+WHERE Salary < 40000;
+
+DELETE FROM Attendance
+WHERE AttendanceDate = '2026-07-01';
+
+CREATE VIEW EmployeeDetails AS
+SELECT e.EmpID,e.EmpName,d.DeptName,e.Salary
+FROM Employee e
+JOIN Department d
+ON e.DeptID = d.DeptID;
+SELECT * FROM EmployeeDetails;
+
+DELIMITER //
+
+CREATE PROCEDURE GetEmployees()
+BEGIN
+    SELECT * FROM Employee;
+END //
+
+DELIMITER ;
+CALL GetEmployees();
