@@ -273,5 +273,3 @@ select a.agents_code, b.agents_name from agents a, agentss b where a.working_are
 
 -- CROSS JOIN
 Select e.ename , d.dname from tbl_employee e cross  join  tbl_dept d;
-
-
