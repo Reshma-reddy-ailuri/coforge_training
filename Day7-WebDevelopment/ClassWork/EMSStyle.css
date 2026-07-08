@@ -1,0 +1,13 @@
+.header{
+	color: green;
+	border: 2px solid magenta;
+	text-align: center;
+	border-radius:14px;
+}
+
+.content{
+	color: orange;
+	border: 2px solid lightblue;
+	text-align: center;
+	border-radius:14px;
+}

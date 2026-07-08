@@ -1,0 +1,17 @@
+.Logindiv {
+			border:2px dotted green;
+			width:250px;
+			color:Magenta;
+			border-radius: 20px;
+			position: absolute;
+			top: 320px;
+			left: 600px;
+	}
+	
+	.Loginbutton {
+		border:none;
+		background:brown;
+		color: white;
+		border-radius: 14px;
+		cursor:pointer;
+	}

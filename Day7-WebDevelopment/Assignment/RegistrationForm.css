@@ -1,0 +1,43 @@
+body{
+    font-family: Arial, sans-serif;
+    background-color: white;
+}
+
+table{
+    width: 70%;
+    margin: 40px auto;
+}
+
+table, th, td{
+    border: 1px solid black;
+}
+
+th{
+    font-size: 36px;
+    padding: 15px;
+}
+
+td{
+    padding: 8px;
+}
+
+td:first-child{
+    width: 35%;
+    font-weight: bold;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="date"]{
+    width: 180px;
+    padding: 5px;
+}
+
+textarea{
+    resize: none;
+}
+
+input[type="submit"]{
+    padding: 6px 12px;
+}
