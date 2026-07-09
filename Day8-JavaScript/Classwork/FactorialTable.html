@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<script type="text/javascript">	
+  function factorialTable() {
+		var n1 = parseInt(document.getElementById("n1").value);
+		var fact = 1;
+		var result = "";
+		
+		result = "<table border = '1' width='60%'>";
+		result += "<tr><th>Number</th><th>Factorial</th></tr>";
+		for(let i=1; i<=n1 ; i++){
+			fact = fact*i;
+			result += "<tr><td>" + i + "</td><td>" + fact + "</td></tr>";
+		}
+		result += "</table>";
+		document.getElementById("Factdiv").innerHTML = result;
+  }	
+</script>
+
+</head>
+<body>
+Enter No1<input type="number" id="n1" />
+<br>
+<button onclick="factorialTable()">Factorial Table </button>
+<div id="Factdiv">
+</div>
+</body>
+</html>

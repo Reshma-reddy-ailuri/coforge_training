@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>DOM Example</title>
+
+<style>
+.mystyle{
+    color:red;
+}
+</style>
+
+<script>
+
+function createDOM(){
+
+    const myElement = document.createElement("h1");
+
+    myElement.setAttribute("id","MyH1");
+
+    myElement.textContent = "Welcome to JavaScript DOM";
+
+    document.body.appendChild(myElement);
+}
+
+function updateDOM(){
+
+    const myElement =
+    document.getElementById("MyH1");
+
+    myElement.textContent = "New Text";
+}
+
+function changeDOMStyle(){
+
+    const myElement =
+    document.getElementById("MyH1");
+
+    myElement.classList.add("mystyle");
+}
+
+function removeDOM(){
+
+    const myElement =
+    document.getElementById("MyH1");
+
+    myElement.remove();
+}
+
+</script>
+
+</head>
+
+<body>
+
+<button onclick="createDOM()">Create DOM</button>
+
+<button onclick="updateDOM()">Update DOM</button>
+
+<button onclick="changeDOMStyle()">Change DOM</button>
+
+<button onclick="removeDOM()">Remove DOM</button>
+
+</body>
+</html>

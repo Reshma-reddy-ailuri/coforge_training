@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<script type="text/javascript"> 
+	function add(a=10,b=20) {
+		console.log(a+b);
+	}
+	add(); // takes default values
+	add(100);
+	add(100,200);
+	
+	// rest paramater (...)
+	function add(a,b, ...args) {
+		console.log(a+b);
+		
+		let total = 0;
+		for(let n of args) {
+			total = total+n;
+		}
+		console.log(total);
+	}
+	add(100,200,10,20,30);
+	// spread operator(...)
+	const odd = [1,3,5];
+	const combined = [2,4,6, ...odd];
+	console.log(combined);
+	
+	//Array Destructuring
+	let arr=[10,20,30,40,50];
+	let[x,y,z]=arr;
+	console.log(x);//10
+	console.log(y);//20
+	console.log(z);//30
+	let[a,b,c, ...args]=arr;
+	console.log(args);//40,50
+	
+	//Object Destructuring
+	let person={
+			firstName : 'Reshma',
+			lastName : 'Reddy'
+	}
+	let{firstName: fname ,lastName:lname} = person; //here the person firstname value is assigning to fname ,similarly to lname
+const add1 = (a,b) => a+b;
+const Welcome = (name) => "Welcome" + name;
+function MyFunction() {
+	console.log(add1(10,20));
+	console.log(Welcome("Reshma"));
+}	
+</script>
+</head>
+<body onload="MyFunction()">
+</body>
+</html>

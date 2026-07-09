@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>DOM Assignment</title>
+<script type="text/javascript">
+	function changeText() {
+		document.getElementById("heading").innerHTML = "Welcome to JavaScript DOM";
+	}
+	
+	function changeColor() {
+		document.body.style.backgroundColor="lightblue";
+	}
+	
+	function backgroundImage() {
+		document.getElementById("myImage").src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRCv8fRfPHKLOk_RRISvks7Mb24ylSjm9-KFKcrdlDt4g&s=10";
+	}
+	
+	function hidePara(){
+		document.getElementById("para").style.display="none";
+	}
+	function showPara() {
+		document.getElementById("para").style.display="block";
+	}
+	
+	function changeFontSize() {
+		document.getElementById("fontsize").style.fontSize="10px";
+	}
+</script>
+</head>
+<body>
+<h1 id="heading">Hello Everyone</h1>
+<button onclick="changeText()">Change Text</button>
+<br> <br>
+
+<h2>click the button to change background color</h2>
+<button onclick="changeColor()">Change Color</button>
+<br> <br>
+
+
+<img id="myImage" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSVVF0h_oQM5P4q3y94D39FQy_ev1aP6uRFAY-GZdkk3g&s=10" width="30%" height="30%">
+<button onclick="backgroundImage()">Change Image </button>
+<br> <br>
+
+
+<p id="para">Lorem Ipsum is the standard placeholder text used in design, publishing, and web development to fill spaces before the actual content is finalized. It helps creators and clients focus on visual layouts and typography without getting distracted by readable words.</p>
+<button onclick="hidePara()">Hide Paragraph </button>
+<button onclick="showPara()">Show Paragraph</button>
+<br> <br>
+
+
+<p id="fontsize">This is a Paragraph </p>
+<button onclick="changeFontSize()">Change Font Size</button>
+<br> <br>
+
+</body>
+</html>
