@@ -7,17 +7,34 @@
 <script type="text/javascript">
 	function passwordStrength() {
 		var password = document.getElementById("pwd").value;
-		
+
 		var req = new XMLHttpRequest();
-		req.open("GET","http://localhost:8012/MyWebApplication/PasswordStrengthServlet?pwd="+password);
+		req.open("GET",
+				"http://localhost:8012/MyWebApplication/PasswordStrengthServlet?pwd="
+						+ password);
 		req.onreadystatechange = function() {
 			if (req.readyState == 4 && req.status == 200) {
 				document.getElementById("result").innerHTML = req.responseText;
 			}
 		};
 		req.send();
-		
-		
+
+	}
+
+	function emailCheck() {
+		var email = document.getElementById("email").value;
+
+		var req = new XMLHttpRequest();
+		req.open("GET",
+				"http://localhost:8012/MyWebApplication/EmailCheckServlet?email="
+						+ email);
+		req.onreadystatechange = function() {
+			if (req.readyState == 4 && req.status == 200) {
+				document.getElementById("result1").innerHTML = req.responseText;
+			}
+		};
+		req.send();
+
 	}
 </script>
 </head>
@@ -56,12 +73,15 @@
 
 		<tr>
 			<td>Email ID</td>
-			<td><input type="email"></td>
+			<td><input type="email" id="email" value="Enter Your Email"
+				onfocus="this.value=''" onblur="emailCheck()"> <span
+				id="result1"></span></td>
 		</tr>
-		
+
 		<tr>
 			<td>Password</td>
-			<td>i<input type="password" id="pwd" onkeyup="passwordStrength()" /> <span id="result"> </span></td>
+			<td>i<input type="password" id="pwd"
+				onkeyup="passwordStrength()" /> <span id="result"> </span></td>
 		<tr>
 			<td>Mobile No.</td>
 			<td><input type="tel"></td>
