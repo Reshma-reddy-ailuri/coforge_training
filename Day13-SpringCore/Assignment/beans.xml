@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+<bean id="student" class="com.coforge.model.Student">
+	<property name="sid" value="101"></property>
+	<property name="sname" value="Rahul Sharma"></property>
+	<property name="address" ref="address"></property>
+	
+	<property name="subjects">
+	<list> 
+	<value>Java</value> 
+	<value>Spring Core</value>
+	<value>Hibernate</value> 
+	<value>MySQL</value> 
+	<value>React</value> 
+	</list>
+	</property>
+	
+	<property name="technicalSkills">
+	<set>
+	<value>Communication</value>
+	<value>Problem Solving</value>
+	<value>Team Work</value>
+	<value>Java</value>
+	</set>
+	</property>
+	
+	<property name="marks">
+	<map>
+		<entry key="Java" value="95"></entry>
+		<entry key="Spring" value="90"></entry>
+		<entry key="Hibernate" value="88"></entry>
+		<entry key="MySQL" value="92"></entry>
+		<entry key="React" value="85"></entry>
+	</map>
+	</property>
+</bean>
+
+<bean id="address" class="com.coforge.model.Address">
+	<property name="city" value="City-1" ></property>
+	<property name="state" value="State-1" ></property>
+</bean>
+</beans>
