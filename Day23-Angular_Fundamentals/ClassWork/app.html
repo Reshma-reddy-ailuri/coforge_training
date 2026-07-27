@@ -1,0 +1,112 @@
+<!--<h1 class="MyHeading">Welcome to Angular</h1>
+
+<app-my-child-1></app-my-child-1> -->
+
+<!-- Angular One Way Data Binding - Interpolation -->
+
+<!--<br>
+
+<b [ngStyle]="myStyle" (click)="changeName()">
+    Name : {{ name }}
+</b>
+
+<br>
+
+<b [ngClass]="myClass" (click)="changeName(); zoomInOut()">
+    Name : {{ name }}
+</b>
+
+<br>
+Age : {{ age }}
+
+<br>
+Email :
+<input type="text" value="{{ email }}">
+
+<br>
+Addition : {{ getAddition(10, 20) }}
+
+<br>
+
+<img
+    src="{{ imagePath }}"
+    width="{{ width }}"
+    height="{{ height }}"
+    alt="Profile Image">
+
+<hr> -->
+
+<!-- Angular One Way Property Binding -->
+<!--
+<br>
+Email :
+<input type="text" [value]="email" />
+
+<br>
+
+<img
+    [src]="imagePath"
+    [width]="width"
+    [height]="height"
+    alt="Profile Image">
+
+<br> -->
+
+<!-- Angular Event Binding -->
+<!--
+<button (click)="changeName()">
+    Change Name
+</button>
+
+<button (click)="zoomInOut()">
+    Zoom In / Zoom Out
+</button> -->
+
+<!-- Angular Two Way Property Binding -->
+ <!--
+<br>
+Enter your First Name : <input type = "text" [(ngModel)] = "fName" />
+<br>
+Welcome {{fName}}
+
+<app-structural-component></app-structural-component>
+<app-addition-component></app-addition-component>
+<app-subtraction-component></app-subtraction-component>
+<app-employee-component></app-employee-component>
+
+<div>
+  <table width="80%">
+  <tr><td>Upper Case Pipe  </td><td>{{ name | uppercase }}</td></tr>
+  <tr><td>Lower Case Pipe  </td><td>{{ name | lowercase }}</td></tr>
+  <tr><td>Title Case Pipe  </td><td>{{ name | titlecase }}</td></tr>
+  </table>
+  <hr/><br>
+  <table width="100%">
+  <tr><td>Date Pipe  </td><td>{{ date }}</td></tr>
+  <tr><td>Date Pipe  </td><td>{{ date | date: 'dd/MMM/yyyy' }}</td></tr>
+  <tr><td>Date Pipe  </td><td>{{ date | date: 'dd-MM-yy' }}</td></tr>
+  <tr><td>Date Pipe  </td><td>{{ date | date: 'fullDate' }}</td></tr>
+  <tr><td>Date Pipe  </td><td>{{ date | date: 'fullDate' | uppercase}}</td></tr>
+  <tr><td>Date Pipe  </td><td>{{ date | date: 'shortTime' }}</td></tr>
+  </table>
+  <hr/><br>
+  <table width="80%">
+  <tr><td>Percent Pipe   </td><td>{{00.54565 | percent}}</td></tr>
+  <tr><td>Currency Pipe  </td><td>{{6589.23 | currency:"USD"}}</td></tr>
+  </table>
+  </div> -->
+
+<div class="myDiv">
+<table width="100%" [cellSpacing]="15" [cellPadding]="10">
+<tr>
+<td><a routerLink="Home">Home</a></td>
+<td><a routerLink="Contact">Contact</a></td>
+<td><a routerLink="About">About</a></td>
+</tr>
+</table>
+<hr/>
+<div>
+   This is the space for New Component.
+   <router-outlet></router-outlet>
+</div>
+</div>

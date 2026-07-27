@@ -1,0 +1,11 @@
+<button (click) = "toggle()">Toggle Employee</button>
+<div *ngIf="flag">
+    <br> EmployeeID : {{EmployeeId}}
+    <br> Name : {{Name}}
+    <br> Department : {{Department}}
+    <br> Salary : {{Salary}}
+</div>
+
+<div *ngIf = "!flag">
+    <p>No Employee Found</p>
+</div>
