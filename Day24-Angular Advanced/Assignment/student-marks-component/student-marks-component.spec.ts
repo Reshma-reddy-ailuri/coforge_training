@@ -1,0 +1,22 @@
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+
+import { StudentMarksComponent } from './student-marks-component';
+
+describe('StudentMarksComponent', () => {
+  let component: StudentMarksComponent;
+  let fixture: ComponentFixture<StudentMarksComponent>;
+
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      declarations: [StudentMarksComponent],
+    }).compileComponents();
+
+    fixture = TestBed.createComponent(StudentMarksComponent);
+    component = fixture.componentInstance;
+    await fixture.whenStable();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+});

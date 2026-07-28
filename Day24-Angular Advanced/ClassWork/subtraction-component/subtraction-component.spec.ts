@@ -1,0 +1,22 @@
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+
+import { SubtractionComponent } from './subtraction-component';
+
+describe('SubtractionComponent', () => {
+  let component: SubtractionComponent;
+  let fixture: ComponentFixture<SubtractionComponent>;
+
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      declarations: [SubtractionComponent],
+    }).compileComponents();
+
+    fixture = TestBed.createComponent(SubtractionComponent);
+    component = fixture.componentInstance;
+    await fixture.whenStable();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+});

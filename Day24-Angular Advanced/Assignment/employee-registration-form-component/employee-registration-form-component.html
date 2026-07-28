@@ -1,0 +1,146 @@
+<h2>Employee Registration Form</h2>
+
+<form #empForm="ngForm" (ngSubmit)="submit()">
+
+Employee Id
+
+<input
+type="number"
+name="id"
+required
+[(ngModel)]="employee.id"
+#id="ngModel">
+
+<div *ngIf="id.invalid && id.touched">
+Employee Id Required
+</div>
+
+<br>
+
+Employee Name
+
+<input
+type="text"
+name="name"
+required
+[(ngModel)]="employee.name"
+#name="ngModel">
+
+<div *ngIf="name.invalid && name.touched">
+Employee Name Required
+</div>
+
+<br>
+
+Email
+
+<input
+type="email"
+name="email"
+required
+email
+[(ngModel)]="employee.email"
+#email="ngModel">
+
+<div *ngIf="email.errors?.['required'] && email.touched">
+Email Required
+</div>
+
+<div *ngIf="email.errors?.['email']">
+Invalid Email
+</div>
+
+<br>
+
+Mobile
+
+<input
+type="text"
+name="mobile"
+required
+pattern="^[0-9]{10}$"
+[(ngModel)]="employee.mobile"
+#mobile="ngModel">
+
+<div *ngIf="mobile.errors?.['required']">
+Mobile Required
+</div>
+
+<div *ngIf="mobile.errors?.['pattern']">
+Enter 10 digits
+</div>
+
+<br>
+
+Department
+
+<input
+type="text"
+name="department"
+required
+[(ngModel)]="employee.department"
+#department="ngModel">
+
+<div *ngIf="department.invalid && department.touched">
+Department Required
+</div>
+
+<br>
+
+Gender
+
+<input
+type="radio"
+name="gender"
+value="Male"
+[(ngModel)]="employee.gender"
+required>Male
+
+<input
+type="radio"
+name="gender"
+value="Female"
+[(ngModel)]="employee.gender">Female
+
+<br><br>
+
+Date of Joining
+
+<input
+type="date"
+name="doj"
+required
+[(ngModel)]="employee.doj"
+#doj="ngModel">
+
+<div *ngIf="doj.invalid && doj.touched">
+Date Required
+</div>
+
+<br>
+
+Salary
+
+<input
+type="number"
+name="salary"
+required
+min="1"
+[(ngModel)]="employee.salary"
+#salary="ngModel">
+
+<div *ngIf="salary.errors?.['required']">
+Salary Required
+</div>
+
+<div *ngIf="salary.errors?.['min']">
+Salary must be positive
+</div>
+
+<br><br>
+
+<button type="submit" [disabled]="empForm.invalid">
+Submit
+</button>
+
+</form>

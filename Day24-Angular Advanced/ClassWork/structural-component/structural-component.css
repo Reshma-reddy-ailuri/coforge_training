@@ -1,0 +1,9 @@
+.MyDiv {
+    width : 50%;
+    height : 50%;
+    border : 2px solid green;
+    color : green;
+    font-style : bold;
+    border-radius: 20px;
+
+}

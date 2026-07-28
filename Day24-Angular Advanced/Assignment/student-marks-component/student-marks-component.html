@@ -1,0 +1,44 @@
+<h2>Student Results</h2>
+
+<table border="1">
+
+<tr>
+
+<th>S.No</th>
+<th>Name</th>
+<th>Marks</th>
+<th>Result</th>
+
+</tr>
+
+<tr *ngFor="let student of students;let i=index">
+
+<td>{{i+1}}</td>
+
+<td>{{student.name}}</td>
+
+<td>{{student.marks}}</td>
+
+<td>
+
+<span *ngIf="student.marks>=35;else fail">
+Pass
+</span>
+
+<ng-template #fail>
+Fail
+</ng-template>
+
+</td>
+
+</tr>
+
+</table>
+
+<hr>
+
+<h3>Total Students : {{students.length}}</h3>
+
+<h3>Pass Count : {{passCount}}</h3>
+
+<h3>Fail Count : {{failCount}}</h3>

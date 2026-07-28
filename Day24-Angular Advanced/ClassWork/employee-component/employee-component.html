@@ -1,0 +1,14 @@
+<h1><b>
+<!--#employeeForm is name fo the form 
+ngForm means sayign it that it is form
+ngSubmit means when we are submitting do that -->
+<form #employeeForm="ngForm" (ngSubmit)="saveEmployee(employeeForm.value)">
+    <br>Employee Details
+    <br>Employee Id : <input type="number" name = "eid" #eid="ngModel" ngModel />
+    <br>Employee Name : <input type = "text" name = "ename" #ename="ngModel" ngModel  />
+    <br>Employee Salary : <input type = "number" name = "esalary" #esalary="ngModel" ngModel  />
+    <br>Employee Dno : <input type = "number"  name = "dno" #dno="ngModel" ngModel />
+    <br><button>Save Employee</button>
+    <br>Result : {{result}}
+</form>
+</b></h1>

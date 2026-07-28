@@ -1,0 +1,95 @@
+<br>
+
+<button [ngStyle]="myButtonStyle" (click)="showHideDiv()">
+    Show Hide Div
+</button>
+
+<br>
+
+<div [ngClass]="myDivStyle" *ngIf="flag">
+
+    {{ message }}
+
+    <br>
+
+    <ul>
+            @for(vehicle of vehicles;track vehicle){
+            <li (click)="setSelectedVehicle(vehicle)">
+            {{ vehicle }}</li>
+            }
+    </ul>
+
+    <br>
+
+    You Have Selected : {{ selectedVehicle }}
+
+    <br>
+
+    <div>
+        @switch(selectedVehicle) {
+        
+        @case('Car')
+        {<img src="car.jpg"/>}
+        @case('Bike')
+        {<img src="bike.jpg"/>}
+        @case('Bus')
+        {<img src="bus.jpg"/>}
+        @case('Truck')
+        {<img src="truck.jpg"/>}
+        @default
+        {<font color="red">
+            Invalid Selection
+        </font> }
+    }
+
+</div>
+</div>
+
+<!--New Structural Directive Syntax-->
+<br>
+
+<button [ngStyle]="myButtonStyle" (click)="showHideDiv()">
+    Show Hide Div
+</button>
+
+<br>
+
+@if(flag){
+<div [ngClass]="myDivStyle">
+
+    {{ message }}
+
+    <br>
+
+    <ul>
+        <li
+            *ngFor="let vehicle of vehicles"
+            (click)="setSelectedVehicle(vehicle)">
+            {{ vehicle }}
+        </li>
+    </ul>
+
+    <br>
+
+    You Have Selected : {{ selectedVehicle }}
+
+    <br>
+
+    <div [ngSwitch]="selectedVehicle">
+
+        <img src="car.jpg" *ngSwitchCase="'Car'">
+
+        <img src="bike.jpg" *ngSwitchCase="'Bike'">
+
+        <img src="bus.jpg" *ngSwitchCase="'Bus'">
+
+        <img src="truck.jpg" *ngSwitchCase="'Truck'">
+
+        <font color="red" *ngSwitchDefault>
+            Invalid Selection
+        </font>
+
+    </div>
+
+</div>
+}

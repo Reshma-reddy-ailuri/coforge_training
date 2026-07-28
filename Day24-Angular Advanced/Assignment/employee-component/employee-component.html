@@ -1,0 +1,40 @@
+<h2>Employee Dashboard</h2>
+
+<button (click)="toggleEmployee()">
+    {{showEmployee ? 'Hide Employee' : 'Show Employee'}}
+</button>
+
+<hr>
+
+<div *ngIf="showEmployee; else noEmployee">
+
+    <table border="1" cellpadding="8">
+        <tr>
+            <th>Employee Id</th>
+            <td>{{employee.id}}</td>
+        </tr>
+
+        <tr>
+            <th>Name</th>
+            <td>{{employee.name}}</td>
+        </tr>
+
+        <tr>
+            <th>Department</th>
+            <td>{{employee.department}}</td>
+        </tr>
+
+        <tr>
+            <th>Salary</th>
+            <td>{{employee.salary}}</td>
+        </tr>
+
+    </table>
+
+</div>
+
+<ng-template #noEmployee>
+
+<h3>No Employee Found</h3>
+
+</ng-template>
