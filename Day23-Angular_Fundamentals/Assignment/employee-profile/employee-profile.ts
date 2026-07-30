@@ -15,7 +15,7 @@ export class EmployeeProfile {
 
   constructor() {
     this.EmployeeId = 101;
-    this.Name = "Rahul Sharma";
+    this.Name = "Reshma";
     this.Department = "Development";
     this.Salary = 65000; 
   }
